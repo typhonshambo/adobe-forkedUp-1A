@@ -1,0 +1,480 @@
+{
+  "title": "A Strategic and Technical Blueprint for the \"Connecting the Dots\" Hackathon",
+  "outline": [
+    {
+      "level": "H1",
+      "text": "A Strategic and Technical Blueprint for the \"Connecting the",
+      "page": 1
+    },
+    {
+      "level": "H1",
+      "text": "Dots\" Hackathon",
+      "page": 1
+    },
+    {
+      "level": "H1",
+      "text": "Introduction: From Static Pages to Intelligent Companions",
+      "page": 1
+    },
+    {
+      "level": "H1",
+      "text": "Part I: Architecting the Document Structure Extractor (Round 1A)",
+      "page": 2
+    },
+    {
+      "level": "H2",
+      "text": "1.1 Foundational Tooling: Selecting the Optimal PDF Parsing Engine",
+      "page": 2
+    },
+    {
+      "level": "H1",
+      "text": "● PyPDF2/pypdf: While popular for basic PDF manipulation tasks like merging or",
+      "page": 2
+    },
+    {
+      "level": "H1",
+      "text": "● PDFMiner: This library represents a significant step up from PyPDF2, offering",
+      "page": 2
+    },
+    {
+      "level": "H1",
+      "text": "● PyMuPDF (Fitz): This library is the unequivocally superior choice for this",
+      "page": 2
+    },
+    {
+      "level": "H1",
+      "text": "PyMuPDF (Fitz)",
+      "page": 3
+    },
+    {
+      "level": "H1",
+      "text": "PyMuPDF (Fitz) Very High Excellent Low (C-library Optimal",
+      "page": 3
+    },
+    {
+      "level": "H2",
+      "text": "1.2 The Logic of Hierarchical Structure Detection",
+      "page": 4
+    },
+    {
+      "level": "H1",
+      "text": "1. Feature Extraction and Body Text Profiling:",
+      "page": 4
+    },
+    {
+      "level": "H1",
+      "text": "2. Heading Classification Rules:",
+      "page": 4
+    },
+    {
+      "level": "H1",
+      "text": "○ Font Weight: Its font name contains substrings like \"Bold\", \"Black\", \"Heavy\",",
+      "page": 5
+    },
+    {
+      "level": "H1",
+      "text": "○ Typographic Style: The text is rendered in ALL CAPS, a common convention",
+      "page": 5
+    },
+    {
+      "level": "H1",
+      "text": "○ Spatial Position: The line is typically left-aligned (indicated by a low $x_0$",
+      "page": 5
+    },
+    {
+      "level": "H1",
+      "text": "○ Structural Patterns: The text begins with a numerical or alphabetical pattern",
+      "page": 5
+    },
+    {
+      "level": "H1",
+      "text": "○ Brevity: The line is syntactically concise and does not form a complete,",
+      "page": 5
+    },
+    {
+      "level": "H1",
+      "text": "3. Hierarchical Level Assignment (H1, H2, H3):",
+      "page": 5
+    },
+    {
+      "level": "H1",
+      "text": "○ Primary Method (Typographic Clustering): Group all identified headings by",
+      "page": 5
+    },
+    {
+      "level": "H1",
+      "text": "○ Secondary Method (Structural Analysis): For documents that rely on",
+      "page": 5
+    },
+    {
+      "level": "H1",
+      "text": "4. Title Extraction:",
+      "page": 5
+    },
+    {
+      "level": "H2",
+      "text": "1.3 Achieving Peak Performance and Compliance",
+      "page": 7
+    },
+    {
+      "level": "H1",
+      "text": "● Performance Budget Compliance: The 10-second limit for a 50-page PDF",
+      "page": 7
+    },
+    {
+      "level": "H1",
+      "text": "● Model Size Compliance: The solution has a negligible model footprint. The core",
+      "page": 7
+    },
+    {
+      "level": "H2",
+      "text": "1.4 Securing Bonus Points: A Pragmatic Approach to Multilingual Handling",
+      "page": 8
+    },
+    {
+      "level": "H1",
+      "text": "Part II: Building the Persona-Driven Intelligence Engine (Round",
+      "page": 9
+    },
+    {
+      "level": "H2",
+      "text": "2.1 From Structure to Semantics: The Core Intelligence Architecture",
+      "page": 9
+    },
+    {
+      "level": "H1",
+      "text": "semantic vector search. This approach moves beyond fragile keyword matching and",
+      "page": 9
+    },
+    {
+      "level": "H1",
+      "text": "1. Input Processing: The system receives a collection of 3-10 PDF files, a persona",
+      "page": 9
+    },
+    {
+      "level": "H1",
+      "text": "2. Semantic Chunking: For each PDF, the system uses the structured JSON outline",
+      "page": 9
+    },
+    {
+      "level": "H1",
+      "text": "3. Query Formulation: The persona and job-to-be-done strings are concatenated",
+      "page": 9
+    },
+    {
+      "level": "H1",
+      "text": "4. Vector Embedding: A pre-trained sentence-transformer model is used to",
+      "page": 10
+    },
+    {
+      "level": "H1",
+      "text": "5. Relevance Ranking: The relevance of each chunk to the user's need is",
+      "page": 10
+    },
+    {
+      "level": "H1",
+      "text": "6. Output Generation: The chunks are ranked in descending order based on their",
+      "page": 10
+    },
+    {
+      "level": "H2",
+      "text": "2.2 Selecting the Ideal On-Device Embedding Model",
+      "page": 10
+    },
+    {
+      "level": "H1",
+      "text": "sentence-transformers/all-MiniLM-L6-v2 emerges as the optimal choice for this",
+      "page": 10
+    },
+    {
+      "level": "H1",
+      "text": "● Compact Size: The model is approximately 80-90MB on disk, consuming less",
+      "page": 10
+    },
+    {
+      "level": "H1",
+      "text": "● High Performance: As a \"MiniLM\" (Mini Language Model), it is designed for",
+      "page": 11
+    },
+    {
+      "level": "H1",
+      "text": "● Proven Effectiveness: Despite its small size, all-MiniLM-L6-v2 is a powerful,",
+      "page": 11
+    },
+    {
+      "level": "H1",
+      "text": "all-MiniLM-L6-",
+      "page": 11
+    },
+    {
+      "level": "H1",
+      "text": "all-MiniLM-L6-~86 384 Very High Excellent",
+      "page": 11
+    },
+    {
+      "level": "H2",
+      "text": "2.3 Implementing High-Relevance Semantic Ranking",
+      "page": 11
+    },
+    {
+      "level": "H1",
+      "text": "1. Offline Model Loading:",
+      "page": 11
+    },
+    {
+      "level": "H1",
+      "text": "2. Document Chunking and Query Formulation:",
+      "page": 12
+    },
+    {
+      "level": "H1",
+      "text": "3. Initial Retrieval with Embedding Model:",
+      "page": 12
+    },
+    {
+      "level": "H1",
+      "text": "4. Final Ranking with Cross-Encoder:",
+      "page": 13
+    },
+    {
+      "level": "H1",
+      "text": "5. Formatting the Final Output:",
+      "page": 13
+    },
+    {
+      "level": "H2",
+      "text": "2.4 Designing for Generalization",
+      "page": 14
+    },
+    {
+      "level": "H1",
+      "text": "Part III: Engineering a Compliant, Production-Ready Solution",
+      "page": 15
+    },
+    {
+      "level": "H2",
+      "text": "3.1 Crafting the Optimal Offline Docker Container",
+      "page": 15
+    },
+    {
+      "level": "H1",
+      "text": "multi-stage Dockerfile. This approach separates the build-time environment from",
+      "page": 15
+    },
+    {
+      "level": "H1",
+      "text": "1. The builder Stage:",
+      "page": 15
+    },
+    {
+      "level": "H1",
+      "text": "2. The final Stage:",
+      "page": 15
+    },
+    {
+      "level": "H2",
+      "text": "3.2 Final Submission Strategy and Documentation",
+      "page": 18
+    },
+    {
+      "level": "H1",
+      "text": "● Git Repository Structure: A clean and logical project structure is recommended",
+      "page": 18
+    },
+    {
+      "level": "H1",
+      "text": "● Authoring a High-Quality README.md: The README.md is a scored deliverable",
+      "page": 18
+    },
+    {
+      "level": "H1",
+      "text": "○ Your Approach: A high-level summary of the technical strategy. This should",
+      "page": 18
+    },
+    {
+      "level": "H1",
+      "text": "○ Models or Libraries Used: An explicit list of the key dependencies and their",
+      "page": 18
+    },
+    {
+      "level": "H1",
+      "text": "○ How to Build and Run Your Solution: While the judges will use the",
+      "page": 18
+    },
+    {
+      "level": "H1",
+      "text": "● Final Submission Checklist: Before submission, a final review against the",
+      "page": 19
+    },
+    {
+      "level": "H1",
+      "text": "Works cited",
+      "page": 19
+    },
+    {
+      "level": "H1",
+      "text": "2. Extract Text from a PDF — PyPDF2 documentation - Read the Docs, accessed",
+      "page": 19
+    },
+    {
+      "level": "H1",
+      "text": "3. A Guide to PDF Extraction Libraries in Python - Metric Coders, accessed July 16,",
+      "page": 19
+    },
+    {
+      "level": "H1",
+      "text": "4. Data Extraction from Unstructured PDFs - Analytics Vidhya, accessed July 16,",
+      "page": 19
+    },
+    {
+      "level": "H1",
+      "text": "5. Extract text from PDF File using Python - GeeksforGeeks, accessed July 16, 2025,",
+      "page": 19
+    },
+    {
+      "level": "H1",
+      "text": "6. Extracting Information from PDF Documents with Python | by Saurabh",
+      "page": 19
+    },
+    {
+      "level": "H1",
+      "text": "7. How to extract text from PDF on the basis of font size using python ..., accessed",
+      "page": 19
+    },
+    {
+      "level": "H1",
+      "text": "8. PDFDataExtractor: A Tool for Reading Scientific Text and Interpreting Metadata",
+      "page": 19
+    },
+    {
+      "level": "H1",
+      "text": "9. Features Comparison - PyMuPDF 1.26.3 documentation, accessed July 16, 2025,",
+      "page": 19
+    },
+    {
+      "level": "H1",
+      "text": "10. Comparing 4 methods for pdf text extraction in python | by Jeanna Schoonmaker",
+      "page": 19
+    },
+    {
+      "level": "H1",
+      "text": "11. Which is faster at extracting text from a PDF: PyMuPDF or PyPDF2? : r/learnpython",
+      "page": 19
+    },
+    {
+      "level": "H1",
+      "text": "12. Text - PyMuPDF 1.26.3 documentation, accessed July 16, 2025,",
+      "page": 19
+    },
+    {
+      "level": "H1",
+      "text": "13. Tutorial - PyMuPDF 1.26.3 documentation, accessed July 16, 2025,",
+      "page": 20
+    },
+    {
+      "level": "H1",
+      "text": "14. Appendix 1: Details on Text Extraction - PyMuPDF 1.26.3 documentation, accessed",
+      "page": 20
+    },
+    {
+      "level": "H1",
+      "text": "15. How to Extract Text from a PDF Using PyMuPDF and Python | by Neurond AI |",
+      "page": 20
+    },
+    {
+      "level": "H1",
+      "text": "16. A Comparative Study of PDF Parsing Tools Across Diverse Document Categories",
+      "page": 20
+    },
+    {
+      "level": "H1",
+      "text": "17. Font - PyMuPDF 1.26.3 documentation, accessed July 16, 2025,",
+      "page": 20
+    },
+    {
+      "level": "H1",
+      "text": "18. Is there a way to delete headers/footers in PDF documents? #2259 - GitHub,",
+      "page": 20
+    },
+    {
+      "level": "H1",
+      "text": "19. How to extract text under specific headings from a pdf? - Stack Overflow,",
+      "page": 20
+    },
+    {
+      "level": "H1",
+      "text": "20. Extract Text from Images and Scanned PDFs with Python (OCR) | by Alice Yang -",
+      "page": 20
+    },
+    {
+      "level": "H1",
+      "text": "21. How to properly extract Japanese txt from PDF files - Stack Overflow, accessed",
+      "page": 20
+    },
+    {
+      "level": "H1",
+      "text": "22. JP OCR Language not working! - API - OpenAI Developer Community, accessed",
+      "page": 20
+    },
+    {
+      "level": "H1",
+      "text": "23. Mastering PDF Text with PyMuPDF's 'insert_htmlbox': What You Need to Know -",
+      "page": 20
+    },
+    {
+      "level": "H1",
+      "text": "24. How to extract clean japanese text from the pdf folder in python - Stack",
+      "page": 20
+    },
+    {
+      "level": "H1",
+      "text": "25. Extracting Structured Data from PDFs Using AI, Python, and Vector Databases.,",
+      "page": 20
+    },
+    {
+      "level": "H1",
+      "text": "26. Using Sentence Transformers at Hugging Face, accessed July 16, 2025,",
+      "page": 20
+    },
+    {
+      "level": "H1",
+      "text": "27. Semantic Search with Hugging Face Models and Datasets - SingleStore Spaces,",
+      "page": 20
+    },
+    {
+      "level": "H1",
+      "text": "32. Offline, Multistage Python Dockerfile - DEV Community, accessed July 16, 2025,",
+      "page": 21
+    },
+    {
+      "level": "H1",
+      "text": "33. How to Dockerize a Python Application | by Leonardo Rodrigues Martins,",
+      "page": 21
+    },
+    {
+      "level": "H1",
+      "text": "36. The best Docker base image for your Python application (May 2024), accessed",
+      "page": 21
+    },
+    {
+      "level": "H1",
+      "text": "37. How to Move Files with Python - YouTube, accessed July 16, 2025,",
+      "page": 21
+    },
+    {
+      "level": "H1",
+      "text": "38. Python: How to List Files in Directory | Built In, accessed July 16, 2025,",
+      "page": 21
+    },
+    {
+      "level": "H1",
+      "text": "39. How to iterate over files in directory using Python? - GeeksforGeeks, accessed",
+      "page": 21
+    },
+    {
+      "level": "H1",
+      "text": "40. Tutorial: Iterate Over Files in a Directory Using Python - Pierian Training, accessed",
+      "page": 21
+    }
+  ]
+}

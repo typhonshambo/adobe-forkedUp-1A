@@ -1,0 +1,35 @@
+{
+  "title": "Application form for grant of LTC advance",
+  "outline": [
+    {
+      "level": "H1",
+      "text": "Application form for grant of LTC advance",
+      "page": 1
+    },
+    {
+      "level": "H1",
+      "text": "Name of the Government Servant 1.",
+      "page": 1
+    },
+    {
+      "level": "H1",
+      "text": "PAY + SI + NPA 4.",
+      "page": 1
+    },
+    {
+      "level": "H1",
+      "text": "Whether permanent or temporary 5.",
+      "page": 1
+    },
+    {
+      "level": "H1",
+      "text": "S.No Name Age Relationship",
+      "page": 1
+    },
+    {
+      "level": "H1",
+      "text": "Signature of Government Servant.",
+      "page": 1
+    }
+  ]
+}

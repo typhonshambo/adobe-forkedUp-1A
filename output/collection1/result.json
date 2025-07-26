@@ -1,0 +1,75 @@
+{
+  "metadata": {
+    "input_documents": [
+      "South of France - Cities.pdf",
+      "South of France - Cuisine.pdf",
+      "South of France - History.pdf",
+      "South of France - Restaurants and Hotels.pdf",
+      "South of France - Things to Do.pdf",
+      "South of France - Tips and Tricks.pdf",
+      "South of France - Traditions and Culture.pdf"
+    ],
+    "persona": "Travel Planner",
+    "job_to_be_done": "Plan a trip of 4 days for a group of 10 college friends.",
+    "processing_timestamp": "2025-07-26T11:52:21.293141"
+  },
+  "extracted_sections": [
+    {
+      "document": "South of France - Tips and Tricks.pdf",
+      "section_title": "Introduction",
+      "importance_rank": 1,
+      "page_number": 1
+    },
+    {
+      "document": "South of France - Tips and Tricks.pdf",
+      "section_title": "Conclusion",
+      "importance_rank": 2,
+      "page_number": 9
+    },
+    {
+      "document": "South of France - Things to Do.pdf",
+      "section_title": "Conclusion",
+      "importance_rank": 3,
+      "page_number": 13
+    },
+    {
+      "document": "South of France - Things to Do.pdf",
+      "section_title": "Introduction",
+      "importance_rank": 4,
+      "page_number": 1
+    },
+    {
+      "document": "South of France - Tips and Tricks.pdf",
+      "section_title": "Basic Toiletries: Toothbrush, toothpaste, shampoo, conditioner, body wash,",
+      "importance_rank": 5,
+      "page_number": 4
+    }
+  ],
+  "subsection_analysis": [
+    {
+      "document": "South of France - Tips and Tricks.pdf",
+      "refined_text": "Planning a trip to the South of France requires thoughtful preparation to ensure a comfortable and enjoyable experience. This guide covers everything from packing essentials to travel tips, catering to all seasons and various activities. Whether you're traveling solo, with kids, or in a group, this guide will help you make the most of your trip.",
+      "page_number": 1
+    },
+    {
+      "document": "South of France - Tips and Tricks.pdf",
+      "refined_text": "Packing for a trip to the South of France involves considering the season, planned activities, and the needs of both adults and children. By following this comprehensive guide and incorporating the tips and tricks provided, you'll be well-prepared for a comfortable and enjoyable trip. Remember to pack light, versatile clothing, and essential items to make the most of your travel experience. Bon voyage!",
+      "page_number": 9
+    },
+    {
+      "document": "South of France - Things to Do.pdf",
+      "refined_text": "The South of France is a diverse and enchanting region that oﬀers a wide range of activities and experiences for travelers. Whether you're exploring the stunning coastline, immersing yourself in the rich cultural heritage, or indulging in the culinary delights, there is something for everyone to enjoy. From family-friendly adventures to vibrant nightlife, the South of France promises an unforgettable journey filled with memories that will last a lifetime. Use this guide to plan your trip and make the most of everything this beautiful region has to oﬀer.",
+      "page_number": 13
+    },
+    {
+      "document": "South of France - Things to Do.pdf",
+      "refined_text": "The South of France, with its stunning coastline, picturesque villages, and vibrant cities, oﬀers a wealth of activities and experiences for travelers. Whether you're seeking adventure, relaxation, or cultural enrichment, this region has something for everyone. This guide will take you through a variety of activities and must-see attractions to help you plan an unforgettable trip.",
+      "page_number": 1
+    },
+    {
+      "document": "South of France - Tips and Tricks.pdf",
+      "refined_text": "deodorant, and personal hygiene items. • Skincare: Sunscreen, moisturizer, and daily skincare products. • Makeup: Pack essentials in a travel-sized makeup bag. • Additional Items: A small sewing kit, nail clippers, and a razor. • Additional Tips: Consider packing a travel-sized perfume or cologne to freshen up on the go. Gadgets and Accessories • Electronics: Smartphone, charger, power bank, and other devices. Bring a travel adapter if needed. • Camera: Capture memories with a camera, extra batteries, and memory cards.",
+      "page_number": 4
+    }
+  ]
+}

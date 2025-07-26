@@ -13,7 +13,9 @@ I use PyMuPDF as the primary extraction tool with pdfplumber as backup. The syst
 The solution identifies document sections by detecting headings and structural patterns. For documents without clear headings, it creates logical sections based on content breaks and topic shifts.
 
 ### Relevance Scoring
-I implemented a TF-IDF based similarity system that compares document sections to the persona description and job requirements. This gives a base similarity score that I then enhance with targeted keyword boosting.
+I implemented a dual-stage semantic similarity system using modern transformer models. The first stage uses sentence-transformers to create dense embeddings of document sections and the persona+job query. This captures deeper semantic relationships than traditional keyword matching.
+
+For enhanced accuracy, I added a cross-encoder reranking stage that evaluates the top candidates more precisely. This two-stage approach balances speed with quality - fast initial screening followed by detailed reranking.
 
 ### Persona Boosting
 Different personas get different keyword weights. For example, "Travel Planner" gets boosted scores for terms like "itinerary," "booking," and "destinations." This helps surface the most relevant content even when basic similarity might miss domain-specific relevance.
@@ -25,18 +27,22 @@ The system ranks all sections by their combined relevance scores and selects the
 
 ### Libraries Used
 - PyMuPDF and pdfplumber for PDF text extraction
-- scikit-learn for TF-IDF vectorization and cosine similarity
+- sentence-transformers for semantic embeddings and cross-encoder reranking
+- scikit-learn for cosine similarity calculations
 - NLTK for text tokenization and cleaning
+- PyTorch as the underlying ML framework
 - Standard Python libraries for file handling and JSON output
 
 ### Processing Pipeline
 1. Extract text from all PDFs in the collection
 2. Break content into logical sections with page tracking
-3. Calculate TF-IDF vectors for all sections
-4. Score sections against persona + job description
-5. Apply persona-specific keyword boosts
-6. Rank and select top 5 most relevant sections
-7. Clean and format the output JSON
+3. Generate sentence embeddings for all sections using all-MiniLM-L6-v2
+4. Create query embedding from persona + job description
+5. Calculate cosine similarities between query and all sections
+6. Rerank top 20 candidates using cross-encoder for precision
+7. Apply persona-specific keyword boosts
+8. Select top 5 most relevant sections
+9. Clean and format the output JSON
 - **Robust error handling**: Graceful fallback mechanisms for problematic PDFs
 
 ## Technical Specifications
@@ -73,7 +79,9 @@ The solution processes typical document collections in 2-4 seconds, well under t
 
 ## Design Decisions  
 
-I chose TF-IDF over more complex models because it's lightweight, fast, and effective for this use case. The persona-specific boosting allows for domain expertise without requiring large training datasets.
+I chose sentence-transformers over traditional TF-IDF because it provides much better semantic understanding. The all-MiniLM-L6-v2 model captures contextual relationships that keyword-based methods miss, while the cross-encoder adds precision for the final ranking.
+
+The two-stage approach (embedding similarity + cross-encoder reranking) balances efficiency with accuracy. Initial screening is fast, then detailed evaluation focuses computational resources where they matter most.
 
 The modular architecture with separate extractor, analyzer, and formatter classes makes the code maintainable and allows easy extension for new document types or personas.
 

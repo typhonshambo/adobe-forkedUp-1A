@@ -2,21 +2,22 @@ import re
 import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
-from sklearn.feature_extraction.text import TfidfVectorizer
+from sentence_transformers import SentenceTransformer, CrossEncoder
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 from typing import Dict, List, Tuple
+import torch
 
 
 class PersonaAnalyzer:
     def __init__(self):
         self._ensure_nltk_data()
         self.stop_words = set(stopwords.words('english'))
-        self.vectorizer = TfidfVectorizer(
-            stop_words='english',
-            max_features=1000,
-            ngram_range=(1, 2)
-        )
+        
+        print("Loading sentence transformer models...")
+        self.sentence_model = SentenceTransformer('all-MiniLM-L6-v2')
+        self.cross_encoder = CrossEncoder('cross-encoder/ms-marco-MiniLM-L6-v2')
+        print("Models loaded successfully!")
     
     def _ensure_nltk_data(self):
         try:
@@ -30,7 +31,6 @@ class PersonaAnalyzer:
             nltk.download('stopwords', quiet=True)
     
     def analyze_relevance(self, documents: Dict, persona: str, job_description: str) -> List[Dict]:
-        
         all_sections = []
         for doc_name, doc_content in documents.items():
             sections = doc_content.get('sections', [])
@@ -47,7 +47,7 @@ class PersonaAnalyzer:
         if not all_sections:
             return []
         
-        scored_sections = self._calculate_relevance_scores(
+        scored_sections = self._calculate_transformer_scores(
             all_sections, persona, job_description
         )
         
@@ -55,110 +55,99 @@ class PersonaAnalyzer:
         
         return scored_sections
     
-    def _calculate_relevance_scores(self, sections: List[Dict], persona: str, job_description: str) -> List[Dict]:
-        
+    def _calculate_transformer_scores(self, sections: List[Dict], persona: str, job_description: str) -> List[Dict]:
         section_texts = [section['full_text'] for section in sections]
-        query_text = f"{persona} {job_description}"
+        query_text = f"{persona}: {job_description}"
         
-        all_texts = section_texts + [query_text]
+        print(f"Encoding {len(section_texts)} sections with sentence transformers...")
         
-        try:
-            tfidf_matrix = self.vectorizer.fit_transform(all_texts)
-            query_vector = tfidf_matrix[-1]  # Last item is the query
-            document_vectors = tfidf_matrix[:-1]  # All except query
-            
-            similarities = cosine_similarity(query_vector, document_vectors).flatten()
-            
-        except Exception:
-            similarities = self._fallback_similarity(section_texts, query_text)
+        section_embeddings = self.sentence_model.encode(section_texts, show_progress_bar=False)
+        query_embedding = self.sentence_model.encode([query_text], show_progress_bar=False)
         
-        persona_keywords = self._extract_persona_keywords(persona, job_description)
+        similarities = cosine_similarity(query_embedding, section_embeddings)[0]
+        
+        top_indices = np.argsort(similarities)[-min(20, len(sections)):][::-1]
+        
+        print("Reranking with cross-encoder...")
+        rerank_pairs = []
+        for idx in top_indices:
+            rerank_pairs.append([query_text, section_texts[idx]])
+        
+        if rerank_pairs:
+            cross_scores = self.cross_encoder.predict(rerank_pairs)
+        else:
+            cross_scores = []
         
         for i, section in enumerate(sections):
-            base_score = similarities[i]
-            persona_boost = self._calculate_persona_boost(section['full_text'], persona_keywords)
+            if i in top_indices:
+                rerank_idx = list(top_indices).index(i)
+                base_score = float(similarities[i])
+                cross_score = float(cross_scores[rerank_idx]) if rerank_idx < len(cross_scores) else base_score
+                final_score = 0.3 * base_score + 0.7 * cross_score
+            else:
+                final_score = float(similarities[i])
             
-            section['relevance_score'] = base_score + persona_boost
-            section['importance_rank'] = 0  # Will be set after sorting
+            boosted_score = self._apply_persona_boosting(section['full_text'], persona, final_score)
+            section['relevance_score'] = boosted_score
         
         return sections
     
-    def _extract_persona_keywords(self, persona: str, job_description: str) -> List[str]:
-        combined_text = f"{persona} {job_description}".lower()
+    def _apply_persona_boosting(self, text: str, persona: str, base_score: float) -> float:
+        persona_keywords = self._get_persona_keywords(persona.lower())
+        text_lower = text.lower()
         
-        tokens = word_tokenize(combined_text)
-        keywords = [
-            token for token in tokens 
-            if (len(token) > 3 and 
-                token.isalpha() and 
-                token not in self.stop_words)
-        ]
+        boost = 0.0
+        for keyword in persona_keywords:
+            if keyword in text_lower:
+                boost += 0.1
+        
+        return base_score + min(boost, 0.5)
+    
+    def _get_persona_keywords(self, persona: str) -> List[str]:
+        keyword_map = {
+            'travel': ['itinerary', 'booking', 'destination', 'hotel', 'flight', 'trip', 'vacation'],
+            'hr': ['employee', 'onboarding', 'compliance', 'form', 'policy', 'hiring', 'benefits'],
+            'food': ['recipe', 'ingredient', 'cooking', 'menu', 'vegetarian', 'gluten', 'dietary'],
+            'research': ['methodology', 'analysis', 'data', 'study', 'research', 'findings'],
+            'business': ['revenue', 'investment', 'market', 'strategy', 'financial', 'growth'],
+            'student': ['concept', 'study', 'exam', 'learning', 'education', 'theory']
+        }
+        
+        keywords = []
+        for domain, terms in keyword_map.items():
+            if domain in persona:
+                keywords.extend(terms)
         
         return keywords
-    
-    def _calculate_persona_boost(self, text: str, persona_keywords: List[str]) -> float:
-        if not persona_keywords:
-            return 0.0
-        
-        text_lower = text.lower()
-        matches = sum(1 for keyword in persona_keywords if keyword in text_lower)
-        
-        boost = min(matches / len(persona_keywords) * 0.3, 0.3)
-        return boost
-    
-    def _fallback_similarity(self, section_texts: List[str], query_text: str) -> np.ndarray:
-        query_words = set(query_text.lower().split())
-        similarities = []
-        
-        for text in section_texts:
-            text_words = set(text.lower().split())
-            overlap = len(query_words.intersection(text_words))
-            max_words = max(len(query_words), len(text_words))
-            similarity = overlap / max_words if max_words > 0 else 0.0
-            similarities.append(similarity)
-        
-        return np.array(similarities)
     
     def refine_section_content(self, sections: List[Dict]) -> List[Dict]:
         refined_sections = []
         
         for section in sections:
             content = section.get('content', '')
-            
-            refined_content = self._clean_content(content)
-            
-            if len(refined_content) < 50:
-                refined_content = self._expand_content(section, refined_content)
+            refined_text = self._clean_and_refine_text(content)
             
             refined_section = {
                 'document': section['document'],
-                'refined_text': refined_content,
+                'refined_text': refined_text,
                 'page_number': section['page_number']
             }
-            
             refined_sections.append(refined_section)
         
         return refined_sections
     
-    def _clean_content(self, content: str) -> str:
-        if not content:
+    def _clean_and_refine_text(self, text: str) -> str:
+        if not text:
             return ""
         
-        content = re.sub(r'\s+', ' ', content.strip())
+        text = re.sub(r'\s+', ' ', text)
+        text = re.sub(r'[^\w\s.,!?;:()\-"]', ' ', text)
+        text = text.strip()
         
-        content = re.sub(r'\x0c', ' ', content)  # Form feed
-        content = re.sub(r'[\x00-\x08\x0b\x0c\x0e-\x1f\x7f-\xff]', '', content)
+        sentences = re.split(r'[.!?]+\s+', text)
+        sentences = [s.strip() for s in sentences if len(s.strip()) > 20]
         
-        content = content.replace('ﬁ', 'fi').replace('ﬂ', 'fl')
-        content = content.replace("'", "'").replace(""", '"').replace(""", '"')
+        if len(sentences) > 10:
+            sentences = sentences[:10]
         
-        return content.strip()
-    
-    def _expand_content(self, section: Dict, current_content: str) -> str:
-        title = section.get('title', '')
-        full_text = section.get('full_text', '')
-        
-        if len(current_content) < 50 and full_text:
-            return self._clean_content(full_text)
-        
-        return current_content
+        return ' '.join(sentences)

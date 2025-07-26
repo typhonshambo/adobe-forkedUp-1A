@@ -13,65 +13,65 @@
     ],
     "persona": "Food Contractor",
     "job_to_be_done": "Prepare a vegetarian buffet-style dinner menu for a corporate gathering, including gluten-free items.",
-    "processing_timestamp": "2025-07-26T11:52:26.170607"
+    "processing_timestamp": "2025-07-27T01:09:39.629803"
   },
   "extracted_sections": [
     {
-      "document": "Breakfast Ideas.pdf",
-      "section_title": "Instructions:",
+      "document": "Dinner Ideas - Mains_2.pdf",
+      "section_title": "Ingredients:",
       "importance_rank": 1,
-      "page_number": 15
-    },
-    {
-      "document": "Dinner Ideas - Sides_3.pdf",
-      "section_title": "Instructions :",
-      "importance_rank": 2,
-      "page_number": 12
-    },
-    {
-      "document": "Dinner Ideas - Sides_3.pdf",
-      "section_title": "Instructions :",
-      "importance_rank": 3,
       "page_number": 2
     },
     {
-      "document": "Dinner Ideas - Sides_1.pdf",
-      "section_title": "Instructions :",
-      "importance_rank": 4,
-      "page_number": 4
+      "document": "Dinner Ideas - Mains_2.pdf",
+      "section_title": "Ingredients:",
+      "importance_rank": 2,
+      "page_number": 3
     },
     {
-      "document": "Dinner Ideas - Sides_2.pdf",
-      "section_title": "Instructions :",
+      "document": "Breakfast Ideas.pdf",
+      "section_title": "Ingredients:",
+      "importance_rank": 3,
+      "page_number": 6
+    },
+    {
+      "document": "Dinner Ideas - Mains_2.pdf",
+      "section_title": "Ingredients:",
+      "importance_rank": 4,
+      "page_number": 6
+    },
+    {
+      "document": "Dinner Ideas - Mains_1.pdf",
+      "section_title": "Ingredients:",
       "importance_rank": 5,
-      "page_number": 7
+      "page_number": 5
     }
   ],
   "subsection_analysis": [
     {
-      "document": "Breakfast Ideas.pdf",
-      "refined_text": "• In a food processor, combine dates, mixed nuts, dried fruit, and honey. • Process until the mixture comes together. • Press the mixture into a greased baking dish. • Refrigerate for at least 1 hour before cutting into bars. •",
-      "page_number": 15
-    },
-    {
-      "document": "Dinner Ideas - Sides_3.pdf",
-      "refined_text": "o Roast bell peppers until charred, then peel and seed. o Blend peppers, walnuts, breadcrumbs, minced garlic, olive oil, pomegranate molasses, cumin, and salt in a food processor until smooth. o Serve with pita bread. Mutabal ",
-      "page_number": 12
-    },
-    {
-      "document": "Dinner Ideas - Sides_3.pdf",
-      "refined_text": "o Drain and rinse chickpeas. o Blend chickpeas, tahini, lemon juice, minced garlic, and salt in a food processor. o Slowly add olive oil while blending until smooth. o Serve with a drizzle of olive oil. Japchae ",
+      "document": "Dinner Ideas - Mains_2.pdf",
+      "refined_text": "1 pound spaghetti   4 eggs   1 cup grated Parmesan cheese   1 2 cup pancetta, diced   2 cloves garlic, minced   1 4 cup heavy cream (optional)   Salt and pepper to taste   Chopped parsley for garnish",
       "page_number": 2
     },
     {
-      "document": "Dinner Ideas - Sides_1.pdf",
-      "refined_text": "o Roast eggplants until soft, then peel and mash. o Blend mashed eggplant, tahini, lemon juice, minced garlic, and salt in a food processor. o Slowly add olive oil while blending until smooth. o Serve with a drizzle of olive oil. Baked Beans ",
-      "page_number": 4
+      "document": "Dinner Ideas - Mains_2.pdf",
+      "refined_text": "1 pound pork tenderloin, cubed   1 bell pepper, diced   1 small onion, diced   1 2 cup pineapple chunks   1 4 cup ketchup   1 4 cup rice vinegar   1 4 cup soy sauce   1 4 cup brown sugar",
+      "page_number": 3
     },
     {
-      "document": "Dinner Ideas - Sides_2.pdf",
-      "refined_text": "o Drain and rinse chickpeas. o Blend chickpeas, diced onion, minced garlic, chopped parsley, cumin, coriander, and salt in a food processor. o Add flour and mix until combined. o Form mixture into balls and fry in hot oil until golden.",
-      "page_number": 7
+      "document": "Breakfast Ideas.pdf",
+      "refined_text": "2 large eggs   1 4 cup shredded cheese   1 4 cup cooked sausage or bacon   1 4 cup diced bell pepper   1 4 cup diced onions   2 small flour tortillas   Salsa for serving",
+      "page_number": 6
+    },
+    {
+      "document": "Dinner Ideas - Mains_2.pdf",
+      "refined_text": "1 pound chicken thighs, cut into bite-sized pieces   1 4 cup soy sauce   1 4 cup mirin   1 4 cup sake   2 tablespoons sugar   Bamboo skewers   Sliced green onions for garnish",
+      "page_number": 6
+    },
+    {
+      "document": "Dinner Ideas - Mains_1.pdf",
+      "refined_text": "1 pound ground beef   1 small onion, diced   2 cloves garlic, minced   1 jar (24 ounces) marinara sauce   1 can (15 ounces) ricotta cheese   1 egg   1 4 cup grated Parmesan cheese   1 teaspoon dried basil",
+      "page_number": 5
     }
   ]
 }

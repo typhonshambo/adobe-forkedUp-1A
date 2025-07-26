@@ -14,10 +14,14 @@ class PersonaAnalyzer:
         self._ensure_nltk_data()
         self.stop_words = set(stopwords.words('english'))
         
-        print("Loading sentence transformer models...")
-        self.sentence_model = SentenceTransformer('all-MiniLM-L6-v2')
-        self.cross_encoder = CrossEncoder('cross-encoder/ms-marco-MiniLM-L6-v2')
-        print("Models loaded successfully!")
+        print("Loading models...")
+        try:
+            self.sentence_model = SentenceTransformer('all-MiniLM-L6-v2')
+            self.cross_encoder = CrossEncoder('cross-encoder/ms-marco-MiniLM-L6-v2')
+            print("Models loaded successfully")
+        except Exception as e:
+            print(f"Error loading models: {e}")
+            raise e
     
     def _ensure_nltk_data(self):
         try:
@@ -57,21 +61,21 @@ class PersonaAnalyzer:
     
     def _calculate_transformer_scores(self, sections: List[Dict], persona: str, job_description: str) -> List[Dict]:
         section_texts = [section['full_text'] for section in sections]
-        query_text = f"{persona}: {job_description}"
         
-        print(f"Encoding {len(section_texts)} sections with sentence transformers...")
+        # Dynamic query enhancement based on job description keywords
+        job_keywords = self._extract_job_keywords(job_description.lower())
+        enhanced_query = f"{persona}: {job_description}. Focus on {', '.join(job_keywords[:5])}."
         
         section_embeddings = self.sentence_model.encode(section_texts, show_progress_bar=False)
-        query_embedding = self.sentence_model.encode([query_text], show_progress_bar=False)
+        query_embedding = self.sentence_model.encode([enhanced_query], show_progress_bar=False)
         
         similarities = cosine_similarity(query_embedding, section_embeddings)[0]
         
         top_indices = np.argsort(similarities)[-min(20, len(sections)):][::-1]
         
-        print("Reranking with cross-encoder...")
         rerank_pairs = []
         for idx in top_indices:
-            rerank_pairs.append([query_text, section_texts[idx]])
+            rerank_pairs.append([enhanced_query, section_texts[idx]])
         
         if rerank_pairs:
             cross_scores = self.cross_encoder.predict(rerank_pairs)
@@ -87,36 +91,97 @@ class PersonaAnalyzer:
             else:
                 final_score = float(similarities[i])
             
-            boosted_score = self._apply_persona_boosting(section['full_text'], persona, final_score)
+            boosted_score = self._apply_persona_boosting(section['full_text'], persona, final_score, job_description)
             section['relevance_score'] = boosted_score
         
         return sections
     
-    def _apply_persona_boosting(self, text: str, persona: str, base_score: float) -> float:
+    def _apply_persona_boosting(self, text: str, persona: str, base_score: float, job_description: str = "") -> float:
+        job_keywords = self._extract_job_keywords(job_description.lower()) if job_description else []
         persona_keywords = self._get_persona_keywords(persona.lower())
+        all_keywords = set(job_keywords + persona_keywords)
+        
         text_lower = text.lower()
+        title_lower = text_lower.split('\n')[0] if '\n' in text_lower else text_lower[:100]
         
         boost = 0.0
-        for keyword in persona_keywords:
+        # Boost for keyword matches
+        for keyword in all_keywords:
             if keyword in text_lower:
-                boost += 0.1
+                boost += 0.08
         
-        return base_score + min(boost, 0.5)
+        # Dynamic penalty for irrelevant content based on job context
+        penalty_words = self._get_penalty_words(job_description.lower())
+        penalty = 0.0
+        for word in penalty_words:
+            if word in text_lower:
+                penalty += 0.12
+        
+        # Extra penalty for conclusion-type sections when looking for actionable content
+        action_words = ['plan', 'do', 'visit', 'experience', 'try', 'organize']
+        if any(word in job_description.lower() for word in action_words):
+            if any(word in title_lower for word in ['conclusion', 'summary', 'overview']):
+                penalty += 0.3
+                
+        boost -= min(penalty, 0.7)
+        return base_score + min(max(boost, -0.5), 0.9)
     
-    def _get_persona_keywords(self, persona: str) -> List[str]:
-        keyword_map = {
-            'travel': ['itinerary', 'booking', 'destination', 'hotel', 'flight', 'trip', 'vacation'],
-            'hr': ['employee', 'onboarding', 'compliance', 'form', 'policy', 'hiring', 'benefits'],
-            'food': ['recipe', 'ingredient', 'cooking', 'menu', 'vegetarian', 'gluten', 'dietary'],
-            'research': ['methodology', 'analysis', 'data', 'study', 'research', 'findings'],
-            'business': ['revenue', 'investment', 'market', 'strategy', 'financial', 'growth'],
-            'student': ['concept', 'study', 'exam', 'learning', 'education', 'theory']
-        }
+    def _extract_job_keywords(self, job_description: str) -> List[str]:
+        # Extract meaningful keywords from job description
+        tokens = word_tokenize(job_description.lower())
+        meaningful_tokens = [
+            token for token in tokens 
+            if (len(token) > 3 and 
+                token.isalpha() and 
+                token not in self.stop_words)
+        ]
         
-        keywords = []
-        for domain, terms in keyword_map.items():
-            if domain in persona:
-                keywords.extend(terms)
+        # Add context-aware keywords based on common patterns
+        context_keywords = []
+        if any(word in job_description for word in ['trip', 'travel', 'vacation', 'visit']):
+            context_keywords.extend(['activities', 'attractions', 'restaurants', 'hotels', 'things to do'])
+        if any(word in job_description for word in ['friends', 'group', 'college']):
+            context_keywords.extend(['nightlife', 'entertainment', 'budget', 'tips'])
+        if any(word in job_description for word in ['plan', 'organize', 'schedule']):
+            context_keywords.extend(['itinerary', 'guide', 'recommendations'])
+        if any(word in job_description for word in ['business', 'professional', 'work']):
+            context_keywords.extend(['meeting', 'conference', 'networking'])
+        if any(word in job_description for word in ['food', 'cook', 'meal', 'menu']):
+            context_keywords.extend(['recipe', 'ingredients', 'cooking', 'preparation'])
+            
+        return meaningful_tokens + context_keywords
+
+    def _get_penalty_words(self, job_description: str) -> List[str]:
+        penalty_words = []
+        
+        # If looking for practical/actionable content, penalize theoretical content
+        if any(word in job_description for word in ['plan', 'do', 'organize', 'experience']):
+            penalty_words.extend(['history', 'historical', 'ancient', 'medieval', 'founded', 
+                                'century', 'heritage', 'civilization', 'conclusion', 'summary'])
+        
+        # If looking for current/modern content, penalize old information
+        if any(word in job_description for word in ['current', 'modern', 'today', 'now']):
+            penalty_words.extend(['ancient', 'medieval', 'historical', 'traditional'])
+            
+        return penalty_words
+
+    def _get_persona_keywords(self, persona: str) -> List[str]:
+        
+        if 'travel' in persona or 'planner' in persona:
+            keywords = ['activities', 'things to do', 'attractions', 'restaurants', 'hotels', 'nightlife', 
+                       'entertainment', 'beach', 'coastal', 'adventures', 'tips', 'tricks', 'packing',
+                       'itinerary', 'booking', 'destination', 'trip', 'vacation', 'city guide',
+                       'cuisine', 'culinary', 'dining', 'bars', 'clubs', 'tours', 'experiences']
+        elif 'hr' in persona or 'professional' in persona:
+            keywords = ['employee', 'onboarding', 'compliance', 'form', 'policy', 'hiring', 'benefits', 'management']
+        elif 'food' in persona or 'contractor' in persona:
+            keywords = ['recipe', 'ingredient', 'cooking', 'menu', 'vegetarian', 'gluten', 'dietary', 'preparation']
+        elif 'research' in persona:
+            keywords = ['methodology', 'analysis', 'data', 'study', 'research', 'findings', 'academic']
+        elif 'business' in persona:
+            keywords = ['revenue', 'investment', 'market', 'strategy', 'financial', 'growth', 'corporate']
+        else:
+            keywords = ['concept', 'study', 'learning', 'education', 'theory', 'information']
         
         return keywords
     

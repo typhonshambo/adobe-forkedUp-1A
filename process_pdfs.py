@@ -24,20 +24,16 @@ class DocumentProcessor:
             raise ValueError(f"No PDF files found in {input_dir}")
         
         pdf_files.sort(key=lambda x: x.name)
-        print(f"Processing {len(pdf_files)} PDF files...")
         
         all_documents = {}
         for pdf_file in pdf_files:
-            print(f"Extracting: {pdf_file.name}")
             content = self.extractor.extract_document_content(str(pdf_file))
             all_documents[pdf_file.name] = content
         
-        print("Analyzing relevance...")
         relevant_sections = self.analyzer.analyze_relevance(
             all_documents, persona, job_description
         )
         
-        print("Refining content...")
         subsection_analysis = self.analyzer.refine_section_content(
             relevant_sections[:5]
         )
@@ -52,7 +48,6 @@ class DocumentProcessor:
         
         if self.formatter.validate_output_format(output_data):
             self.formatter.save_output(output_data, output_file)
-            print(f"Results saved to: {output_file}")
         else:
             raise ValueError("Output format validation failed")
         
@@ -74,7 +69,6 @@ def main():
         output_path = os.path.join(args.output, args.collection, "result.json")
         
         if not os.path.exists(input_path):
-            print(f"Error: Collection directory not found: {input_path}")
             sys.exit(1)
     else:
         input_path = args.input
@@ -91,11 +85,7 @@ def main():
             output_file=output_path
         )
         
-        print(f"Successfully processed {len(result['metadata']['input_documents'])} documents")
-        print(f"Found {len(result['extracted_sections'])} relevant sections")
-        
     except Exception as e:
-        print(f"Error: {e}")
         sys.exit(1)
 
 

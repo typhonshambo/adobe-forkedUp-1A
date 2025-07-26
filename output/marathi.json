@@ -18,11 +18,6 @@
     },
     {
       "level": "H1",
-      "text": "आज्ञासंचाची घडण",
-      "page": 1
-    },
-    {
-      "level": "H1",
       "text": "२आज्ञासंचाचीघडण५",
       "page": 1
     },
@@ -33,11 +28,6 @@
     },
     {
       "level": "H1",
-      "text": "१प्र(cid:2108)ावना",
-      "page": 3
-    },
-    {
-      "level": "H1",
       "text": "देवनागरࢧࣅदसרासाठࢦ टाकावयाԖा आज्ञा",
       "page": 3
     },
@@ -45,16 +35,6 @@
       "level": "H1",
       "text": "आज्ञासंचाची घडण",
       "page": 5
-    },
-    {
-      "level": "H1",
-      "text": "२आज्ञासंचाचीघडण",
-      "page": 5
-    },
-    {
-      "level": "H1",
-      "text": "अडचण दाखवणे",
-      "page": 6
     },
     {
       "level": "H1",
@@ -98,21 +78,11 @@
     },
     {
       "level": "H1",
-      "text": "GNU Free Documentation License",
-      "page": 13
-    },
-    {
-      "level": "H1",
       "text": "1. APPLICABILITY AND DEFINITIONS",
       "page": 13
     },
     {
-      "level": "H1",
-      "text": "1.APPLICABILITYANDDEFINITIONS",
-      "page": 13
-    },
-    {
-      "level": "H1",
+      "level": "H3",
       "text": "as “Acknowledgements”, “Dedications”, “Endorsements”, or “History”.) To “Preserve",
       "page": 15
     },
@@ -123,17 +93,7 @@
     },
     {
       "level": "H1",
-      "text": "2.VERBATIMCOPYING",
-      "page": 15
-    },
-    {
-      "level": "H1",
       "text": "3. COPYING IN QUANTITY",
-      "page": 16
-    },
-    {
-      "level": "H1",
-      "text": "3.COPYINGINQUANTITY",
       "page": 16
     },
     {
@@ -143,27 +103,12 @@
     },
     {
       "level": "H1",
-      "text": "4.MODIFICATIONS",
-      "page": 16
-    },
-    {
-      "level": "H1",
-      "text": "K. For any section Entitled “Acknowledgements” or “Dedications”, Preserve the Title",
-      "page": 18
-    },
-    {
-      "level": "H1",
       "text": "K.ForanysectionEntitled“Acknowledgements”or“Dedications”,PreservetheTitle",
       "page": 18
     },
     {
-      "level": "H1",
+      "level": "H3",
       "text": "contributor acknowledgements and/or dedications given therein.",
-      "page": 18
-    },
-    {
-      "level": "H1",
-      "text": "contributoracknowledgementsand/ordedicationsgiventherein.",
       "page": 18
     },
     {
@@ -177,18 +122,8 @@
       "page": 19
     },
     {
-      "level": "H2",
-      "text": "Sectionswiththesamenamebutdifferentcontents,makethetitleofeachsuchsection",
-      "page": 19
-    },
-    {
       "level": "H1",
       "text": "Entitled “Acknowledgements”, and any sections Entitled “Dedications”. You must delete",
-      "page": 19
-    },
-    {
-      "level": "H1",
-      "text": "Entitled“Acknowledgements”,andanysectionsEntitled“Dedications”.Youmustdelete",
       "page": 19
     },
     {
@@ -198,17 +133,7 @@
     },
     {
       "level": "H1",
-      "text": "6.COLLECTIONSOFDOCUMENTS",
-      "page": 19
-    },
-    {
-      "level": "H1",
       "text": "7. AGGREGATION WITH INDEPENDENT WORKS",
-      "page": 20
-    },
-    {
-      "level": "H1",
-      "text": "7.AGGREGATIONWITHINDEPENDENTWORKS",
       "page": 20
     },
     {
@@ -218,17 +143,7 @@
     },
     {
       "level": "H1",
-      "text": "8.TRANSLATION",
-      "page": 20
-    },
-    {
-      "level": "H1",
       "text": "If a section in the Document is Entitled “Acknowledgements”, “Dedications”, or",
-      "page": 20
-    },
-    {
-      "level": "H1",
-      "text": "IfasectionintheDocumentisEntitled“Acknowledgements”,“Dedications”,or",
       "page": 20
     },
     {
@@ -238,17 +153,7 @@
     },
     {
       "level": "H1",
-      "text": "9.TERMINATION",
-      "page": 20
-    },
-    {
-      "level": "H1",
       "text": "10. FUTURE REVISIONS OF THIS LICENSE",
-      "page": 21
-    },
-    {
-      "level": "H1",
-      "text": "10.FUTUREREVISIONSOFTHISLICENSE",
       "page": 21
     },
     {
@@ -258,27 +163,12 @@
     },
     {
       "level": "H1",
-      "text": "11.RELICENSING",
-      "page": 21
-    },
-    {
-      "level": "H1",
       "text": "ADDENDUM: How to use this License for your",
       "page": 22
     },
     {
       "level": "H1",
-      "text": "ADDENDUM:HowtousethisLicenseforyour",
-      "page": 22
-    },
-    {
-      "level": "H1",
       "text": "अक्षरजुळणी Typesetting. १",
-      "page": 24
-    },
-    {
-      "level": "H1",
-      "text": "अक्षरजुळणीTypesetting.१",
       "page": 24
     },
     {
@@ -298,17 +188,7 @@
     },
     {
       "level": "H1",
-      "text": "आज्ञासंचPackage.१",
-      "page": 24
-    },
-    {
-      "level": "H1",
       "text": "आज्ञा Command. १",
-      "page": 24
-    },
-    {
-      "level": "H1",
-      "text": "आज्ञाCommand.१",
       "page": 24
     },
     {
@@ -343,17 +223,7 @@
     },
     {
       "level": "H1",
-      "text": "प्राचलParameter,option.३",
-      "page": 24
-    },
-    {
-      "level": "H1",
       "text": "लाटेक्-वगर् Document class. ४",
-      "page": 24
-    },
-    {
-      "level": "H1",
-      "text": "लाटेक्-वगर्Documentclass.४",
       "page": 24
     },
     {
@@ -383,27 +253,12 @@
     },
     {
       "level": "H1",
-      "text": "अडचणError.४",
-      "page": 24
-    },
-    {
-      "level": "H1",
       "text": "मूलटंक Default font. ४",
       "page": 24
     },
     {
       "level": "H1",
-      "text": "मूलटंकDefaultfont.४",
-      "page": 24
-    },
-    {
-      "level": "H1",
       "text": "कायर्घटक Argument. ४",
-      "page": 24
-    },
-    {
-      "level": "H1",
-      "text": "कायर्घटकArgument.४",
       "page": 24
     },
     {
@@ -419,11 +274,6 @@
     {
       "level": "H1",
       "text": "आज्ञापीठ Preamble. ११",
-      "page": 24
-    },
-    {
-      "level": "H1",
-      "text": "आज्ञापीठPreamble.११",
       "page": 24
     },
     {

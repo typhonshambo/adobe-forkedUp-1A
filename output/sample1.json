@@ -43,11 +43,6 @@
     },
     {
       "level": "H1",
-      "text": "PyMuPDF (Fitz)",
-      "page": 3
-    },
-    {
-      "level": "H1",
       "text": "PyMuPDF (Fitz) Very High Excellent Low (C-library Optimal",
       "page": 3
     },
@@ -142,7 +137,7 @@
       "page": 9
     },
     {
-      "level": "H1",
+      "level": "H3",
       "text": "semantic vector search. This approach moves beyond fragile keyword matching and",
       "page": 9
     },
@@ -182,7 +177,7 @@
       "page": 10
     },
     {
-      "level": "H1",
+      "level": "H3",
       "text": "sentence-transformers/all-MiniLM-L6-v2 emerges as the optimal choice for this",
       "page": 10
     },
@@ -202,12 +197,7 @@
       "page": 11
     },
     {
-      "level": "H1",
-      "text": "all-MiniLM-L6-",
-      "page": 11
-    },
-    {
-      "level": "H1",
+      "level": "H3",
       "text": "all-MiniLM-L6-~86 384 Very High Excellent",
       "page": 11
     },
@@ -257,7 +247,7 @@
       "page": 15
     },
     {
-      "level": "H1",
+      "level": "H3",
       "text": "multi-stage Dockerfile. This approach separates the build-time environment from",
       "page": 15
     },
@@ -384,11 +374,6 @@
     {
       "level": "H1",
       "text": "16. A Comparative Study of PDF Parsing Tools Across Diverse Document Categories",
-      "page": 20
-    },
-    {
-      "level": "H1",
-      "text": "17. Font - PyMuPDF 1.26.3 documentation, accessed July 16, 2025,",
       "page": 20
     },
     {

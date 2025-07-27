@@ -1,5 +1,6 @@
 *.pyc
-utils/.DS_Store
+__pycache__/
 .DS_Store
 .venv/
 venv/
+*.egg-info/

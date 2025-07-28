@@ -1,0 +1,46 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+.venv
+venv/
+webapp_env/
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Documentation and examples (not needed for runtime)
+*.md
+!README.md
+
+# Development files
+.pytest_cache
+.coverage
+.tox
+
+# Large files that aren't needed
+*.log
+*.tmp
+
+# Keep only essential files
+!input/
+!output/
+!utils/
+!webapp/
+!process_pdfs.py
+!requirements.txt
+!Dockerfile

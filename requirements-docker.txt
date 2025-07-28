@@ -1,0 +1,21 @@
+# Core PDF processing (lightweight)
+PyMuPDF==1.23.8
+pdfplumber==0.10.3
+
+# Machine Learning (CPU-optimized)
+torch==2.1.0
+sentence-transformers==2.7.0
+transformers==4.36.0
+scikit-learn==1.3.2
+
+# Essential utilities
+numpy==1.24.3
+nltk==3.8.1
+python-dateutil==2.8.2
+
+# Minimal ML dependencies
+huggingface_hub==0.19.4
+
+# Web interface (optional)
+flask==2.3.3
+flask-cors==4.0.0

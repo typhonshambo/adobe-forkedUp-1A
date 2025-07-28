@@ -1,0 +1,84 @@
+{
+  "metadata": {
+    "input_documents": [
+      "Breakfast Ideas.pdf",
+      "Dinner Ideas - Mains_1.pdf",
+      "Dinner Ideas - Mains_2.pdf",
+      "Dinner Ideas - Mains_3.pdf",
+      "Dinner Ideas - Sides_1.pdf",
+      "Dinner Ideas - Sides_2.pdf",
+      "Dinner Ideas - Sides_3.pdf",
+      "Dinner Ideas - Sides_4.pdf",
+      "Lunch Ideas.pdf"
+    ],
+    "persona": "Food Contractor",
+    "job_to_be_done": "Prepare a vegetarian buffet-style dinner menu for a corporate gathering, including gluten-free items.",
+    "processing_timestamp": "2025-07-28T13:19:39.246842",
+    "total_sections_analyzed": 5,
+    "sections_returned": 5
+  },
+  "extracted_sections": [
+    {
+      "document": "Dinner Ideas - Mains_3.pdf",
+      "section_title": "Ingredients:",
+      "importance_rank": 1,
+      "page_number": 2,
+      "relevance_score": 0.6445
+    },
+    {
+      "document": "Dinner Ideas - Mains_2.pdf",
+      "section_title": "Ingredients:",
+      "importance_rank": 2,
+      "page_number": 10,
+      "relevance_score": 0.6432
+    },
+    {
+      "document": "Dinner Ideas - Mains_2.pdf",
+      "section_title": "Ingredients:",
+      "importance_rank": 3,
+      "page_number": 2,
+      "relevance_score": 0.6421
+    },
+    {
+      "document": "Dinner Ideas - Sides_3.pdf",
+      "section_title": "Ingredients :",
+      "importance_rank": 4,
+      "page_number": 9,
+      "relevance_score": 0.6368
+    },
+    {
+      "document": "Lunch Ideas.pdf",
+      "section_title": "Ingredients:",
+      "importance_rank": 5,
+      "page_number": 2,
+      "relevance_score": 0.6368
+    }
+  ],
+  "subsection_analysis": [
+    {
+      "document": "Dinner Ideas - Mains_3.pdf",
+      "refined_text": "4 cups chicken broth   1 4 cup soy sauce   2 tablespoons miso paste   2 cloves garlic, minced   1 piece ginger, sliced   1 2 pound pork belly, sliced   4 eggs, soft-boiled   8 ounces ramen noodles   Sliced green onions, nori, and sesame seeds for garnish",
+      "page_number": 2
+    },
+    {
+      "document": "Dinner Ideas - Mains_2.pdf",
+      "refined_text": "4 chicken thighs   1 small onion, diced   2 cloves garlic, minced   1 cup red wine   1 cup chicken broth   1 cup mushrooms, sliced   1 cup carrots, sliced   1 4 cup bacon, chopped   2 tablespoons tomato paste   2 tablespoons flour",
+      "page_number": 10
+    },
+    {
+      "document": "Dinner Ideas - Mains_2.pdf",
+      "refined_text": "1 pound spaghetti   4 eggs   1 cup grated Parmesan cheese   1 2 cup pancetta, diced   2 cloves garlic, minced   1 4 cup heavy cream (optional)   Salt and pepper to taste   Chopped parsley for garnish",
+      "page_number": 2
+    },
+    {
+      "document": "Dinner Ideas - Sides_3.pdf",
+      "refined_text": "o 1 package dumpling wrappers o 1 2 pound ground pork o 1 2 cup chopped cabbage o 1 4 cup chopped green onions o 2 cloves garlic o 1 tablespoon soy sauce o 1 teaspoon sesame oil o Oil for frying",
+      "page_number": 9
+    },
+    {
+      "document": "Lunch Ideas.pdf",
+      "refined_text": "1 whole wheat tortilla   1 cup cooked chicken breast, sliced   1 cup romaine lettuce, chopped   2 tablespoons Caesar dressing   2 tablespoons grated Parmesan cheese   Optional: croutons for extra crunch",
+      "page_number": 2
+    }
+  ]
+}

@@ -38,15 +38,48 @@ The solution uses semantic analysis with persona-specific enhancement to improve
 
 ## Installation
 
-1. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
+### Local Setup
+```bash
+pip install -r requirements.txt
+```
 
-2. Or use Docker:
-   ```bash
-   docker build -t document-intelligence .
-   ```
+### Docker Setup (Recommended)
+```bash
+# Quick start
+./docker.sh build
+./docker.sh test
+```
+
+Or manually
+```bash
+docker build -t document-intelligence .
+docker run --rm -v $(pwd)/input:/app/input:ro -v $(pwd)/output:/app/output \
+  document-intelligence python process_pdfs.py \
+  --persona "Travel Planner" \
+  --job "Plan a trip for college friends" \
+  --collection collection1
+```
+
+Quick commands:
+```bash
+./docker.sh build    # Build optimized image
+./docker.sh test     # Test with sample data
+./docker.sh webapp   # Start web interface
+./docker.sh clean    # Cleanup resources
+```
+for all commands:
+```bash
+./docker.sh help
+```
+## Docker Optimizations
+
+The Docker image is optimized for:
+- **Size**: Multi-stage build reduces final image size
+- **Speed**: Pre-downloaded models and cached dependencies
+- **Security**: Non-root user execution
+- **Performance**: CPU-optimized PyTorch build
+- **Reliability**: Health checks and error handling
+
 
 ## Usage
 
@@ -77,6 +110,21 @@ Results are generated in JSON format containing:
 
 A web application is available in the `webapp/` directory providing an interactive interface for document analysis.
 
+Local:
+```bash
+python webapp/app.py
+```
+
+Docker:
+```bash
+./docker.sh webapp
+# or
+docker run --rm -p 8080:8080 -v $(pwd)/input:/app/input:ro \
+  document-intelligence python webapp/app.py
+```
+
+Access at `http://localhost:8080`
+
 ## Dependencies
 
 Core libraries:
@@ -85,3 +133,4 @@ Core libraries:
 - scikit-learn: Machine learning utilities
 - NLTK: Text processing
 - Flask: Web interface (optional)
+

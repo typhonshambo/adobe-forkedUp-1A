@@ -18,13 +18,21 @@ classifier.py    - ML heading detection (Random Forest)
 formatter.py     - Outline structure formatting
 process_pdfs.py  - Main processing orchestrator
 ```
+## Docker Support
 
-## Requirements
+```bash
+docker build -t pdf-extractor .
+docker run -v $(pwd)/input:/app/input -v $(pwd)/output:/app/output pdf-extractor
+```
+this will automatically parse all the PDFs in `input/` and create the `output/`
 
-- Python 3.8+
+## Requirements (non-docker)
+
+- Python 3.11.9
 - See `requirements.txt` for dependencies
 
 ## Usage
+
 
 ```bash
 pip install -r requirements.txt
@@ -48,12 +56,6 @@ Place PDFs in `input/` directory. Results saved to `output/`.
 }
 ```
 
-## Docker Support
-
-```bash
-docker build -t pdf-extractor .
-docker run -v $(pwd)/input:/app/input -v $(pwd)/output:/app/output pdf-extractor
-```
 
 ## How It Works
 

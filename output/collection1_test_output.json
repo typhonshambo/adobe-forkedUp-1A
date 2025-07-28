@@ -1,0 +1,82 @@
+{
+  "metadata": {
+    "input_documents": [
+      "South of France - Cities.pdf",
+      "South of France - Cuisine.pdf",
+      "South of France - History.pdf",
+      "South of France - Restaurants and Hotels.pdf",
+      "South of France - Things to Do.pdf",
+      "South of France - Tips and Tricks.pdf",
+      "South of France - Traditions and Culture.pdf"
+    ],
+    "persona": "Travel Planner",
+    "job_to_be_done": "Plan a trip of 4 days for a group of 10 college friends.",
+    "processing_timestamp": "2025-07-28T14:10:56.658267",
+    "total_sections_analyzed": 5,
+    "sections_returned": 5
+  },
+  "extracted_sections": [
+    {
+      "document": "South of France - Restaurants and Hotels.pdf",
+      "section_title": "Budget-Friendly Hotels",
+      "importance_rank": 1,
+      "page_number": 8,
+      "relevance_score": 0.3231
+    },
+    {
+      "document": "South of France - Things to Do.pdf",
+      "section_title": "Coastal Adventures",
+      "importance_rank": 2,
+      "page_number": 2,
+      "relevance_score": 0.3182
+    },
+    {
+      "document": "South of France - Things to Do.pdf",
+      "section_title": "Theme Parks and Attractions",
+      "importance_rank": 3,
+      "page_number": 9,
+      "relevance_score": 0.3151
+    },
+    {
+      "document": "South of France - Things to Do.pdf",
+      "section_title": "Beach Hopping",
+      "importance_rank": 4,
+      "page_number": 2,
+      "relevance_score": 0.3146
+    },
+    {
+      "document": "South of France - Things to Do.pdf",
+      "section_title": "Yoga and Meditation Retreats",
+      "importance_rank": 5,
+      "page_number": 7,
+      "relevance_score": 0.3048
+    }
+  ],
+  "subsection_analysis": [
+    {
+      "document": "South of France - Restaurants and Hotels.pdf",
+      "refined_text": "Ibis Budget Nice Californie Lenval (Nice): A budget-friendly hotel oﬀering comfortable rooms and easy access to the beach and city center The modern amenities and convenient location make it a great choice for budget-conscious travelers Hotel Le Saint Paul (Nice): A charming hotel located in a historic building, oﬀering aﬀordable rates and beautiful views of the Mediterranean The cozy rooms and friendly service make it a pleasant stay Hotel des Arts (Montpellier): A budget-friendly hotel located in the heart of Montpellier, oﬀering comfortable rooms and easy access to the city's attractions The artistic decor and central location make it a popular choice Hotel Le Mistral (Marseille): A budget-friendly hotel oﬀering simple, clean rooms and a convenient location near the Old Port The friendly staﬀ and aﬀordable rates make it a good option for travelers on a budget Hotel Azur (Nice): A budget-friendly hotel oﬀering comfortable rooms and easy access to the beach and city center The modern amenities and convenient location make it a great choice for budget-conscious travelers.",
+      "page_number": 8
+    },
+    {
+      "document": "South of France - Things to Do.pdf",
+      "refined_text": "The South of France is renowned for its beautiful coastline along the Mediterranean Sea Here are some activities to enjoy by the sea: Beach Hopping   Nice : Visit the sandy shores and enjoy the vibrant Promenade des Anglais Antibes : Relax on the pebbled beaches and explore the charming old town Saint-Tropez : Experience the exclusive beach clubs and glamorous atmosphere Marseille to Cassis : Explore the stunning limestone cliﬀs and hidden coves of Calanques National Park Îles d'Hyères : Discover pristine beaches and excellent snorkeling opportunities on islands like Porquerolles and Port-Cros Cannes : Enjoy the sandy beaches and luxury beach clubs along the Boulevard de la Croisette Menton : Visit the serene beaches and beautiful gardens in this charming town near the Italian border.",
+      "page_number": 2
+    },
+    {
+      "document": "South of France - Things to Do.pdf",
+      "refined_text": "Antibes: Visit Marineland for marine shows and an aquarium Fréjus: Cool oﬀ at Aqualand water park Villeneuve-Loubet: Enjoy quirky attractions at Le Village des Fous Monteux: Spend a day at Parc Spirou, a theme park based on the famous comic book character La Palmyre: Explore the La Palmyre Zoo, home to a wide variety of animals Cap d'Agde: Have fun at Luna Park, an amusement park with rides and games Toulouse: Visit the Cité de l'Espace, a space-themed science museum with interactive exhibits Outdoor Adventures   Verdon Gorge: Take a family hike or rent paddle boats to explore the stunning Verdon Gorge.",
+      "page_number": 9
+    },
+    {
+      "document": "South of France - Things to Do.pdf",
+      "refined_text": "Nice : Visit the sandy shores and enjoy the vibrant Promenade des Anglais Antibes : Relax on the pebbled beaches and explore the charming old town Saint-Tropez : Experience the exclusive beach clubs and glamorous atmosphere Marseille to Cassis : Explore the stunning limestone cliﬀs and hidden coves of Calanques National Park Îles d'Hyères : Discover pristine beaches and excellent snorkeling opportunities on islands like Porquerolles and Port-Cros Cannes : Enjoy the sandy beaches and luxury beach clubs along the Boulevard de la Croisette Menton : Visit the serene beaches and beautiful gardens in this charming town near the Italian border Water Sports   Cannes, Nice, and Saint-Tropez : Try jet skiing or parasailing for a thrill.",
+      "page_number": 2
+    },
+    {
+      "document": "South of France - Things to Do.pdf",
+      "refined_text": "Provence : Join a yoga retreat in the serene countryside Pyrenees : Escape to the mountains for a meditation retreat Côte d'Azur : Combine relaxation with luxury at a wellness retreat Luberon : Participate in a holistic retreat with yoga, meditation, and organic meals Camargue : Enjoy a retreat focused on mindfulness and nature immersion Saint-Tropez : Find tranquility at a yoga retreat overlooking the Mediterranean Corsica : Experience a yoga and wellness retreat on this beautiful island.",
+      "page_number": 7
+    }
+  ]
+}

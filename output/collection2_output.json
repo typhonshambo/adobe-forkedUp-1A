@@ -1,0 +1,90 @@
+{
+  "metadata": {
+    "input_documents": [
+      "Learn Acrobat - Create and Convert_1.pdf",
+      "Learn Acrobat - Create and Convert_2.pdf",
+      "Learn Acrobat - Edit_1.pdf",
+      "Learn Acrobat - Edit_2.pdf",
+      "Learn Acrobat - Export_1.pdf",
+      "Learn Acrobat - Export_2.pdf",
+      "Learn Acrobat - Fill and Sign.pdf",
+      "Learn Acrobat - Generative AI_1.pdf",
+      "Learn Acrobat - Generative AI_2.pdf",
+      "Learn Acrobat - Request e-signatures_1.pdf",
+      "Learn Acrobat - Request e-signatures_2.pdf",
+      "Learn Acrobat - Share_1.pdf",
+      "Learn Acrobat - Share_2.pdf",
+      "Test Your Acrobat Exporting Skills.pdf",
+      "The Ultimate PDF Sharing Checklist.pdf"
+    ],
+    "persona": "HR professional",
+    "job_to_be_done": "Create and manage fillable forms for onboarding and compliance.",
+    "processing_timestamp": "2025-07-28T13:17:38.645228",
+    "total_sections_analyzed": 5,
+    "sections_returned": 5
+  },
+  "extracted_sections": [
+    {
+      "document": "Learn Acrobat - Fill and Sign.pdf",
+      "section_title": "Clear unsaved form entries",
+      "importance_rank": 1,
+      "page_number": 15,
+      "relevance_score": 0.5558
+    },
+    {
+      "document": "Learn Acrobat - Fill and Sign.pdf",
+      "section_title": "1. Choose Tools > Prepare a form . In the Fields side panel, choose Clear Form from the",
+      "importance_rank": 2,
+      "page_number": 15,
+      "relevance_score": 0.5449
+    },
+    {
+      "document": "Learn Acrobat - Request e-signatures_1.pdf",
+      "section_title": "1. List the participants required.",
+      "importance_rank": 3,
+      "page_number": 10,
+      "relevance_score": 0.4692
+    },
+    {
+      "document": "Learn Acrobat - Request e-signatures_1.pdf",
+      "section_title": "Simplified mode for multiple signers",
+      "importance_rank": 4,
+      "page_number": 5,
+      "relevance_score": 0.4653
+    },
+    {
+      "document": "Learn Acrobat - Fill and Sign.pdf",
+      "section_title": "1. From the left panel, select Fill in form fields",
+      "importance_rank": 5,
+      "page_number": 2,
+      "relevance_score": 0.4648
+    }
+  ],
+  "subsection_analysis": [
+    {
+      "document": "Learn Acrobat - Fill and Sign.pdf",
+      "refined_text": "Choose Tools   Prepare a form In the Fields side panel, choose Clear Form from the Options menu You can sign a document to attest to its contents or approve the document This document explains how to sign a document or agreement using Acrobat or Reader desktop application To sign a PDF document or form, you can type, draw, or insert an image of your handwritten signature You can also add text, such as your name, company, title, or date When you save the document, the signature and text become part of the PDF.",
+      "page_number": 15
+    },
+    {
+      "document": "Learn Acrobat - Fill and Sign.pdf",
+      "refined_text": "You can sign a document to attest to its contents or approve the document This document explains how to sign a document or agreement using Acrobat or Reader desktop application To sign a PDF document or form, you can type, draw, or insert an image of your handwritten signature You can also add text, such as your name, company, title, or date When you save the document, the signature and text become part of the PDF.",
+      "page_number": 15
+    },
+    {
+      "document": "Learn Acrobat - Request e-signatures_1.pdf",
+      "refined_text": "The Sign action is assigned by default The Sign action allows the participant to enter field data and sign the agreement Up to 50 participants are supported Each participant listed receives their own agreement.",
+      "page_number": 10
+    },
+    {
+      "document": "Learn Acrobat - Request e-signatures_1.pdf",
+      "refined_text": "This mode provides simplified authoring with the capability of assigning fields to multiple signers When you select a signer from the right pane and add fields in the form, the fields are assigned to the signer That means those fields will be available to the signer for filling the information and signing the form.",
+      "page_number": 5
+    },
+    {
+      "document": "Learn Acrobat - Fill and Sign.pdf",
+      "refined_text": ", and then select the field where you want to add text It displays a text field along with a toolbar.",
+      "page_number": 2
+    }
+  ]
+}

@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Intelligence | Connect What Matters</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Modern CSS Variables */
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-light: #818cf8;
+            --secondary: #f59e0b;
+            --accent: #ec4899;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #1a1a2e;
+            --bg-tertiary: #16213e;
+            --bg-glass: rgba(255, 255, 255, 0.03);
+            --bg-card: rgba(255, 255, 255, 0.05);
+            --bg-overlay: rgba(0, 0, 0, 0.8);
+            
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            
+            --border-primary: rgba(255, 255, 255, 0.1);
+            --border-secondary: rgba(255, 255, 255, 0.05);
+            
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --shadow-glow: 0 0 40px rgba(99, 102, 241, 0.4);
+            
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            
+            --transition-fast: 0.15s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.5s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(ellipse at top, var(--bg-secondary) 0%, var(--bg-primary) 70%);
+        }
+
+        .animated-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(99, 102, 241, 0.03) 50%, transparent 70%);
+            animation: shimmer 8s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
+        }
+
+        /* Header */
+        .header {
+            padding: 2rem 0;
+            text-align: center;
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-primary);
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+
+        .header h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Main Layout */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            padding: 3rem 0;
+            min-height: calc(100vh - 200px);
+        }
+
+        /* Input Panel */
+        .input-panel {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-primary);
+            border-radius: 2rem;
+            padding: 2rem;
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .input-panel::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--primary), var(--accent), var(--primary));
+            border-radius: 2rem;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-primary);
+        }
+
+        .panel-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .panel-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        /* Form Sections */
+        .form-section {
+            margin-bottom: 2rem;
+        }
+
+        .form-section label {
+            display: block;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        /* File Upload */
+        .file-upload {
+            position: relative;
+            border: 2px dashed var(--border-primary);
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+            background: var(--bg-card);
+            transition: var(--transition-normal);
+            cursor: pointer;
+        }
+
+        .file-upload:hover {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .file-upload.dragover {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.1);
+            transform: scale(1.02);
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .upload-text {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .upload-hint {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        #fileInput {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* File List */
+        .file-list {
+            margin-top: 1rem;
+        }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 1rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-secondary);
+            border-radius: 0.75rem;
+            margin-bottom: 0.5rem;
+            animation: slideIn 0.3s ease;
+        }
+
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .file-icon {
+            color: var(--error);
+        }
+
+        .file-name {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .file-size {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .remove-file {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 0.25rem;
+            border-radius: 0.25rem;
+            transition: var(--transition-fast);
+        }
+
+        .remove-file:hover {
+            color: var(--error);
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        /* Input Fields */
+        .input-field {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-secondary);
+            border-radius: 1rem;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: var(--transition-normal);
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .input-field::placeholder {
+            color: var(--text-muted);
+        }
+
+        textarea.input-field {
+            min-height: 120px;
+            font-family: var(--font-primary);
+        }
+
+        /* Analyze Button */
+        .analyze-btn {
+            width: 100%;
+            padding: 1.25rem 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border: none;
+            border-radius: 1rem;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .analyze-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .analyze-btn:active {
+            transform: translateY(0);
+        }
+
+        .analyze-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .analyze-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .analyze-btn:hover:not(:disabled)::before {
+            left: 100%;
+        }
+
+        /* Results Panel */
+        .results-panel {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-primary);
+            border-radius: 2rem;
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-xl);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .results-header {
+            padding: 2rem;
+            border-bottom: 1px solid var(--border-primary);
+            background: var(--bg-card);
+        }
+
+        .results-content {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+            max-height: 70vh;
+        }
+
+        /* Placeholder */
+        .placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            text-align: center;
+            color: var(--text-muted);
+            padding: 3rem;
+        }
+
+        .placeholder i {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.3;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .placeholder h3 {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .placeholder p {
+            max-width: 300px;
+            line-height: 1.6;
+        }
+
+        /* Loading State */
+        .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding: 3rem;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(99, 102, 241, 0.1);
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1.5rem;
+        }
+
+        .loading h3 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .loading p {
+            color: var(--text-secondary);
+            text-align: center;
+        }
+
+        /* Result Items */
+        .result-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-primary);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: var(--transition-normal);
+            animation: slideIn 0.5s ease;
+        }
+
+        .result-section:hover {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.03);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-weight: 700;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+        }
+
+        .importance-badge {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 2rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .section-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .section-content {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.05); }
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Sample Cases */
+        .sample-cases {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-primary);
+        }
+
+        .sample-case {
+            background: var(--bg-card);
+            border: 1px solid var(--border-secondary);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            transition: var(--transition-normal);
+        }
+
+        .sample-case:hover {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .case-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .case-description {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        /* Status Messages */
+        .status-message {
+            padding: 1rem;
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .status-success {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--success);
+        }
+
+        .status-error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: var(--error);
+        }
+
+        /* Results Summary */
+        .results-summary {
+            background: var(--bg-card);
+            border: 1px solid var(--border-primary);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .results-summary h3 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .results-summary p {
+            color: var(--text-secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .input-panel,
+            .results-panel {
+                padding: 1.5rem;
+            }
+            
+            .header h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-bg"></div>
+    
+    <div class="header">
+        <div class="container">
+            <h1><i class="fas fa-brain"></i> Document Intelligence</h1>
+            <p>Connect What Matters — For the User Who Matters</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="main-layout">
+            <!-- Input Panel -->
+            <div class="input-panel">
+                <div class="panel-header">
+                    <div class="panel-icon">
+                        <i class="fas fa-upload"></i>
+                    </div>
+                    <div>
+                        <div class="panel-title">Analysis Configuration</div>
+                    </div>
+                </div>
+
+                <!-- File Upload -->
+                <div class="form-section">
+                    <label>Document Collection (3-10 PDFs)</label>
+                    <div class="file-upload" id="fileUpload">
+                        <input type="file" id="fileInput" multiple accept=".pdf">
+                        <div class="upload-icon">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                        </div>
+                        <div class="upload-text">Drop your PDF files here or click to browse</div>
+                        <div class="upload-hint">Maximum 10 files, up to 50 pages each</div>
+                    </div>
+                    <div class="file-list" id="fileList"></div>
+                </div>
+
+                <!-- Persona Definition -->
+                <div class="form-section">
+                    <label for="persona">Persona Definition</label>
+                    <textarea 
+                        id="persona" 
+                        class="input-field" 
+                        placeholder="Describe the persona's role, expertise, and focus areas. Example: 'PhD Researcher in Computational Biology with expertise in machine learning applications for drug discovery'"
+                    ></textarea>
+                </div>
+
+                <!-- Job to be Done -->
+                <div class="form-section">
+                    <label for="jobToBeDone">Job to be Done</label>
+                    <textarea 
+                        id="jobToBeDone" 
+                        class="input-field" 
+                        placeholder="Describe the concrete task. Example: 'Prepare a comprehensive literature review focusing on methodologies, datasets, and performance benchmarks'"
+                    ></textarea>
+                </div>
+
+                <!-- Analyze Button -->
+                <button class="analyze-btn" id="analyzeBtn" disabled>
+                    <i class="fas fa-brain"></i>
+                    Analyze Documents
+                </button>
+
+                <!-- Sample Cases -->
+                <div class="sample-cases">
+                    <label>Quick Start Examples</label>
+                    <div class="sample-case" onclick="loadSampleCase('academic')">
+                        <div class="case-title">🎓 Academic Research</div>
+                        <div class="case-description">PhD Researcher analyzing Graph Neural Networks papers</div>
+                    </div>
+                    <div class="sample-case" onclick="loadSampleCase('business')">
+                        <div class="case-title">📊 Business Analysis</div>
+                        <div class="case-description">Investment Analyst reviewing tech company reports</div>
+                    </div>
+                    <div class="sample-case" onclick="loadSampleCase('education')">
+                        <div class="case-title">📚 Educational Content</div>
+                        <div class="case-description">Chemistry Student studying reaction kinetics</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Panel -->
+            <div class="results-panel">
+                <div class="results-header">
+                    <div class="panel-header">
+                        <div class="panel-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <div>
+                            <div class="panel-title">Analysis Results</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="results-content" id="resultsContent">
+                    <div class="placeholder">
+                        <i class="fas fa-file-alt"></i>
+                        <h3>Ready for Analysis</h3>
+                        <p>Upload your PDF documents, define your persona and job requirements, then click "Analyze Documents" to see intelligent section prioritization.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let uploadedFiles = [];
+        let sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        
+        // DOM Elements
+        const fileUpload = document.getElementById('fileUpload');
+        const fileInput = document.getElementById('fileInput');
+        const fileList = document.getElementById('fileList');
+        const personaInput = document.getElementById('persona');
+        const jobInput = document.getElementById('jobToBeDone');
+        const analyzeBtn = document.getElementById('analyzeBtn');
+        const resultsContent = document.getElementById('resultsContent');
+
+        // File upload handlers
+        fileUpload.addEventListener('click', () => fileInput.click());
+        fileUpload.addEventListener('dragover', handleDragOver);
+        fileUpload.addEventListener('dragleave', handleDragLeave);
+        fileUpload.addEventListener('drop', handleDrop);
+        fileInput.addEventListener('change', handleFileSelect);
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            fileUpload.classList.add('dragover');
+        }
+
+        function handleDragLeave(e) {
+            e.preventDefault();
+            fileUpload.classList.remove('dragover');
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            fileUpload.classList.remove('dragover');
+            const files = Array.from(e.dataTransfer.files).filter(file => file.type === 'application/pdf');
+            addFiles(files);
+        }
+
+        function handleFileSelect(e) {
+            const files = Array.from(e.target.files);
+            addFiles(files);
+        }
+
+        function addFiles(files) {
+            const pdfFiles = files.filter(file => file.type === 'application/pdf');
+            
+            if (uploadedFiles.length + pdfFiles.length > 10) {
+                showStatusMessage('Maximum 10 files allowed', 'error');
+                return;
+            }
+
+            pdfFiles.forEach(file => {
+                if (uploadedFiles.length < 10) {
+                    uploadedFiles.push(file);
+                }
+            });
+
+            updateFileList();
+            updateAnalyzeButton();
+            
+            if (pdfFiles.length > 0) {
+                showStatusMessage(`Added ${pdfFiles.length} PDF file(s)`, 'success');
+            }
+        }
+
+        function removeFile(index) {
+            uploadedFiles.splice(index, 1);
+            updateFileList();
+            updateAnalyzeButton();
+        }
+
+        function updateFileList() {
+            fileList.innerHTML = uploadedFiles.map((file, index) => `
+                <div class="file-item">
+                    <div class="file-info">
+                        <i class="fas fa-file-pdf file-icon"></i>
+                        <div>
+                            <div class="file-name">${file.name}</div>
+                            <div class="file-size">${formatFileSize(file.size)}</div>
+                        </div>
+                    </div>
+                    <button class="remove-file" onclick="removeFile(${index})">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        function updateAnalyzeButton() {
+            const hasFiles = uploadedFiles.length >= 3;
+            const hasPersona = personaInput.value.trim().length > 0;
+            const hasJob = jobInput.value.trim().length > 0;
+            
+            analyzeBtn.disabled = !(hasFiles && hasPersona && hasJob);
+        }
+
+        function showStatusMessage(message, type) {
+            const statusDiv = document.createElement('div');
+            statusDiv.className = `status-message status-${type}`;
+            statusDiv.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-triangle'}"></i>
+                ${message}
+            `;
+            
+            fileList.insertBefore(statusDiv, fileList.firstChild);
+            
+            setTimeout(() => {
+                statusDiv.remove();
+            }, 3000);
+        }
+
+        // Event listeners for input validation
+        personaInput.addEventListener('input', updateAnalyzeButton);
+        jobInput.addEventListener('input', updateAnalyzeButton);
+
+        // Sample case loader
+        function loadSampleCase(type) {
+            const samples = {
+                academic: {
+                    persona: "PhD Researcher in Computational Biology with expertise in machine learning applications for drug discovery. Specialized in graph neural networks, molecular representation learning, and biomedical data analysis.",
+                    job: "Prepare a comprehensive literature review focusing on methodologies, datasets, and performance benchmarks for Graph Neural Networks applied to drug discovery"
+                },
+                business: {
+                    persona: "Investment Analyst with 5+ years experience in technology sector analysis. Expert in financial modeling, market analysis, and competitive intelligence for public companies.",
+                    job: "Analyze revenue trends, R&D investments, and market positioning strategies across competing tech companies for investment recommendations"
+                },
+                education: {
+                    persona: "Undergraduate Chemistry Student in third year, focusing on organic chemistry and reaction mechanisms. Preparing for comprehensive examinations.",
+                    job: "Identify key concepts and mechanisms for exam preparation on reaction kinetics, with emphasis on rate laws, activation energy, and catalysis"
+                }
+            };
+            
+            if (samples[type]) {
+                personaInput.value = samples[type].persona;
+                jobInput.value = samples[type].job;
+                updateAnalyzeButton();
+                
+                // Add visual feedback
+                personaInput.style.borderColor = 'var(--success)';
+                jobInput.style.borderColor = 'var(--success)';
+                setTimeout(() => {
+                    personaInput.style.borderColor = '';
+                    jobInput.style.borderColor = '';
+                }, 1500);
+            }
+        }
+
+        // Analysis function
+        analyzeBtn.addEventListener('click', async function() {
+            if (this.disabled) return;
+            
+            try {
+                showLoading();
+                
+                // First upload files
+                const uploadSuccess = await uploadFiles();
+                if (!uploadSuccess) {
+                    showError('Failed to upload files. Please try again.');
+                    return;
+                }
+                
+                // Then analyze
+                await analyzeDocuments();
+                
+            } catch (error) {
+                console.error('Analysis error:', error);
+                showError('Analysis failed. Please try again.');
+            }
+        });
+
+        async function uploadFiles() {
+            const formData = new FormData();
+            
+            uploadedFiles.forEach(file => {
+                formData.append('files', file);
+            });
+            formData.append('session_id', sessionId);
+            
+            try {
+                const response = await fetch('/api/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.error || 'Upload failed');
+                }
+                
+                const result = await response.json();
+                console.log('Upload successful:', result);
+                return true;
+                
+            } catch (error) {
+                console.error('Upload error:', error);
+                return false;
+            }
+        }
+
+        async function analyzeDocuments() {
+            try {
+                const response = await fetch('/api/analyze', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        persona: personaInput.value.trim(),
+                        job_to_be_done: jobInput.value.trim(),
+                        session_id: sessionId
+                    })
+                });
+                
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.error || 'Analysis failed');
+                }
+                
+                const results = await response.json();
+                displayResults(results);
+                
+            } catch (error) {
+                console.error('Analysis error:', error);
+                throw error;
+            }
+        }
+
+        function showLoading() {
+            resultsContent.innerHTML = `
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    <h3>Processing Documents...</h3>
+                    <p>Uploading files and analyzing content using advanced AI models. This may take a few moments.</p>
+                </div>
+            `;
+        }
+
+        function displayResults(results) {
+            if (!results.sections || results.sections.length === 0) {
+                showError('No relevant sections found in your documents.');
+                return;
+            }
+
+            const sectionsHTML = results.sections.map(section => `
+                <div class="result-section">
+                    <div class="section-header">
+                        <div class="section-title">${section.title}</div>
+                        <div class="importance-badge">Rank #${section.importance_rank}</div>
+                    </div>
+                    <div class="section-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-file-pdf"></i>
+                            ${section.document}
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-file-alt"></i>
+                            Page ${section.page}
+                        </div>
+                        ${section.relevance_score ? `
+                            <div class="meta-item">
+                                <i class="fas fa-percentage"></i>
+                                ${Math.round(section.relevance_score * 100)}% relevance
+                            </div>
+                        ` : ''}
+                    </div>
+                    <div class="section-content">${section.content}</div>
+                </div>
+            `).join('');
+
+            resultsContent.innerHTML = `
+                <div class="results-summary">
+                    <h3>Analysis Complete</h3>
+                    <p>Found ${results.sections.length} highly relevant sections across ${results.metadata.documents.length} documents</p>
+                </div>
+                ${sectionsHTML}
+            `;
+        }
+
+        function showError(message) {
+            resultsContent.innerHTML = `
+                <div class="placeholder">
+                    <i class="fas fa-exclamation-triangle" style="color: var(--error);"></i>
+                    <h3>Analysis Error</h3>
+                    <p>${message}</p>
+                </div>
+            `;
+        }
+
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', async function() {
+            try {
+                await fetch('/api/cleanup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        session_id: sessionId
+                    })
+                });
+            } catch (error) {
+                console.error('Cleanup error:', error);
+            }
+        });
+
+        // Initialize
+        updateAnalyzeButton();
+    </script>
+</body>
+</html>

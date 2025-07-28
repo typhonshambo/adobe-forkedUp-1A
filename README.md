@@ -81,46 +81,23 @@ The Docker image is optimized for:
 - **Reliability**: Health checks and error handling
 
 
-## Usage
-
-Process document collections using the command line interface:
-
-```bash
-python process_pdfs.py \
-  --persona "Travel Planner" \
-  --job "Plan a trip of 4 days for a group of 10 college friends" \
-  --collection collection1
-```
-
-### Parameters
-- `--persona, -p`: Target persona (required)
-- `--job, -j`: Job description (required) 
-- `--collection, -c`: Collection name
-- `--input, -i`: Input directory (default: input)
-- `--output, -o`: Output directory (default: output)
-
-## Output Format
-
-Results are generated in JSON format containing:
-- Document metadata and processing information
-- Top 5 ranked sections with importance scores
-- Refined content with page references
-
 ## Web Interface
 
 A web application is available in the `webapp/` directory providing an interactive interface for document analysis.
 
-Local:
-```bash
-python webapp/app.py
-```
-
 Docker:
 ```bash
 ./docker.sh webapp
-# or
+```
+or
+```
 docker run --rm -p 8080:8080 -v $(pwd)/input:/app/input:ro \
   document-intelligence python webapp/app.py
+```
+
+Local:
+```bash
+python webapp/app.py
 ```
 
 Access at `http://localhost:8080`
